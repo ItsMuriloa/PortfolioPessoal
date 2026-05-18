@@ -1,74 +1,159 @@
-# Portfolio Pessoal
+# Portfolio Pessoal - Murilo Alves
 
-Portfolio pessoal em React, Vite e TypeScript, publicado como site estatico em Nginx na VPS Oracle.
+Meu portfólio pessoal desenvolvido para apresentar minha evolução como desenvolvedor, meus estudos, minhas áreas de interesse e meus projetos publicados no GitHub.
 
-Site em producao:
+A ideia do projeto é funcionar como um "Developer Lab": um espaço visual, simples e direto para reunir desenvolvimento web, automações, infraestrutura, IA generativa, APIs e experimentos que fazem parte da minha jornada técnica.
+
+Site em produção:
 
 ```txt
 https://itsmuriloa.com
 ```
 
-Repositorio remoto usado pela VPS:
+## Sobre o projeto
+
+Este portfólio foi construído com React, TypeScript e Vite. A interface apresenta uma página única com:
+
+- apresentação pessoal;
+- áreas em que estou me desenvolvendo;
+- links para GitHub e LinkedIn;
+- projetos carregados automaticamente pela API pública do GitHub;
+- layout responsivo com assets visuais personalizados.
+
+O foco não é apenas mostrar uma página bonita, mas também organizar de forma clara os conhecimentos que venho praticando em projetos reais.
+
+## Tecnologias utilizadas
+
+- React
+- TypeScript
+- Vite
+- CSS
+- Lucide React
+- GitHub API
+- Nginx
+- VPS Oracle
+
+## Áreas de conhecimento representadas
+
+- Desenvolvimento Web
+- React e Vite
+- TypeScript
+- APIs REST
+- Git e GitHub
+- Automações
+- DevOps e infraestrutura
+- IA generativa
+- Linux e servidores
+
+## Como funciona a integração com GitHub
+
+O portfólio busca automaticamente os repositórios públicos mais recentes do usuário configurado em uma variável de ambiente.
+
+Endpoint utilizado:
 
 ```txt
-git@github.com:ItsMuriloa/PortfolioPessoal.git
+https://api.github.com/users/SEU_USUARIO/repos
 ```
 
-## Fluxo de trabalho
+Os repositórios aparecem na seção de projetos sem precisar editar o código toda vez que um novo projeto público for criado.
 
-A partir de agora, o fluxo recomendado e:
+## Como rodar localmente
 
-```text
-Editar localmente -> testar localmente -> commit -> push GitHub -> entrar na VPS -> pull -> build -> publicar dist/ no Nginx
-```
-
-A VPS deve ser usada apenas para deploy. Evite editar codigo diretamente nela, a menos que seja uma emergencia.
-
-## Rodar localmente
-
-No seu computador local:
+Clone o repositório e instale as dependências:
 
 ```bash
 cd caminho/do/PortfolioPessoal
 npm install
-npm run dev
 ```
 
-O Vite vai abrir o projeto em algo como:
-
-```txt
-http://localhost:5173
-```
-
-## Configurar GitHub
-
-Crie um arquivo `.env` na raiz do projeto com seu usuario do GitHub:
+Crie um arquivo `.env` na raiz do projeto com seu usuário do GitHub:
 
 ```env
 VITE_GITHUB_USERNAME=ItsMuriloa
 ```
 
-O app busca os repositorios publicos mais recentes em:
+Inicie o servidor de desenvolvimento:
 
-```txt
-https://api.github.com/users/ItsMuriloa/repos
+```bash
+npm run dev
 ```
 
-O arquivo `.env` nao deve ser versionado. Use `.env.example` como modelo.
+Depois acesse o endereço exibido no terminal pelo Vite. Normalmente será algo como:
 
-## Personalizar dados
+```txt
+http://localhost:5173
+```
 
-Edite `src/config.ts` para trocar dados do portfolio, como:
+## Scripts disponíveis
 
-- nome;
-- e-mail;
-- GitHub;
-- LinkedIn;
-- headline;
-- bio;
-- habilidades;
-- texto do contato;
-- assunto e corpo pre-preenchidos do `mailto`.
+```bash
+npm run dev
+```
+
+Executa o projeto em modo de desenvolvimento.
+
+```bash
+npm run build
+```
+
+Valida o TypeScript e gera a versão de produção em `dist/`.
+
+```bash
+npm run preview
+```
+
+Executa uma pré-visualização local da build de produção.
+
+## Personalização
+
+Os dados principais podem ser ajustados em:
+
+```txt
+src/config.ts
+```
+
+Nesse arquivo ficam informações como nome, cargo, localização, e-mail, usuário do GitHub, bio e habilidades.
+
+Os textos e seções principais da interface estão em:
+
+```txt
+src/App.tsx
+```
+
+Os estilos globais ficam em:
+
+```txt
+src/styles.css
+```
+
+## Estrutura principal
+
+```txt
+PortfolioPessoal/
+  Img/
+  src/
+    App.tsx
+    config.ts
+    hooks/
+      useGithubPortfolio.ts
+    services/
+      github.ts
+    styles.css
+    main.tsx
+  index.html
+  package.json
+  vite.config.ts
+```
+
+## Fluxo de trabalho
+
+O fluxo recomendado é:
+
+```txt
+Editar localmente -> testar localmente -> commit -> push GitHub -> entrar na VPS -> pull -> build -> publicar dist/ no Nginx
+```
+
+A VPS deve ser usada apenas para deploy. Evite editar código diretamente nela, a menos que seja uma emergência.
 
 ## Antes de enviar para o GitHub
 
@@ -83,11 +168,17 @@ Se o build passar, salve no Git:
 
 ```bash
 git add .
-git commit -m "Descreva sua alteracao"
+git commit -m "Descreva sua alteração"
 git push origin main
 ```
 
 ## Deploy manual na VPS
+
+Repositório remoto usado pela VPS:
+
+```txt
+git@github.com:ItsMuriloa/PortfolioPessoal.git
+```
 
 Entre na VPS:
 
@@ -101,13 +192,13 @@ Acesse o projeto:
 cd /home/ubuntu/apps/PortfolioPessoal
 ```
 
-Atualize o codigo:
+Atualize o código:
 
 ```bash
 git pull origin main
 ```
 
-Instale dependencias somente quando `package.json` ou `package-lock.json` mudar:
+Instale dependências somente quando `package.json` ou `package-lock.json` mudar:
 
 ```bash
 npm ci
@@ -139,7 +230,7 @@ Resultado esperado:
 HTTP/2 200
 ```
 
-## Checklist rapido de deploy
+## Checklist rápido de deploy
 
 ```bash
 ssh oracle-vps
@@ -151,7 +242,7 @@ sudo nginx -t
 curl -I https://itsmuriloa.com
 ```
 
-Use `npm ci` antes do build quando dependencias forem adicionadas, removidas ou atualizadas.
+Use `npm ci` antes do build quando dependências forem adicionadas, removidas ou atualizadas.
 
 ## Pastas importantes na VPS
 
@@ -159,15 +250,17 @@ Use `npm ci` antes do build quando dependencias forem adicionadas, removidas ou 
 /home/ubuntu/apps/PortfolioPessoal
 ```
 
-Copia do repositorio. Use para `git pull`, `npm ci` e `npm run build`.
+Cópia do repositório. Use para `git pull`, `npm ci` e `npm run build`.
 
 ```txt
 /var/www/itsmuriloa.com
 ```
 
-Pasta publica do Nginx. Deve receber somente os arquivos finais de `dist/`.
+Pasta pública do Nginx. Deve receber somente os arquivos finais de `dist/`.
 
-## Cuidados
+## Observação sobre ambiente
+
+O arquivo `.env` não deve ser enviado para o GitHub. Use `.env.example` como referência para outras pessoas configurarem o projeto localmente.
 
 Nunca publique manualmente estas coisas em `/var/www/itsmuriloa.com`:
 
@@ -176,18 +269,12 @@ Nunca publique manualmente estas coisas em `/var/www/itsmuriloa.com`:
 - `node_modules/`;
 - chaves SSH;
 - tokens;
-- documentacao privada;
+- documentação privada;
 - arquivos de backup.
-
-Por isso o deploy usa sempre:
-
-```bash
-sudo rsync -av --delete --chown=www-data:www-data dist/ /var/www/itsmuriloa.com/
-```
 
 ## Verificar estado do servidor
 
-Comandos uteis na VPS:
+Comandos úteis na VPS:
 
 ```bash
 node -v
@@ -196,3 +283,7 @@ sudo nginx -t
 sudo systemctl status nginx --no-pager
 curl -I https://itsmuriloa.com
 ```
+
+## Objetivo
+
+Este repositório representa minha evolução prática em tecnologia. Ele será atualizado conforme eu desenvolver novos projetos, estudar novas ferramentas e consolidar conhecimentos em desenvolvimento, automação, infraestrutura e inteligência artificial.
