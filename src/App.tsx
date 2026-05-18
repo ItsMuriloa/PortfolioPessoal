@@ -30,21 +30,26 @@ const labCards = [
   { label: 'Auto', detail: 'n8n / APIs', icon: Workflow },
 ];
 
-const focusAreas = [
-  'Desenvolvimento Web',
-  'Automações',
-  'DevOps',
-  'IA Generativa',
-  'Git e GitHub',
-  'APIs',
-  'TypeScript',
-  'PHP',
-  'Python',
-  'React',
-  'Vite',
-  'N8N',
+const allowedPerformanceModes = new Set(['no-orbit', 'no-filters', 'no-blur', 'no-motion', 'lite']);
 
-];
+function getContactHref() {
+  const params = new URLSearchParams({
+    subject: portfolioConfig.contactSubject,
+    body: portfolioConfig.contactBody,
+  });
+
+  return 'mailto:' + portfolioConfig.email + '?' + params.toString();
+}
+
+function getPerformanceClassName() {
+  const params = new URLSearchParams(window.location.search);
+  const modes = (params.get('perf') || '')
+    .split(',')
+    .map((mode) => mode.trim())
+    .filter((mode) => allowedPerformanceModes.has(mode));
+
+  return ['portfolio-shell', ...modes.map((mode) => 'perf-' + mode)].join(' ');
+}
 
 export function App() {
   const projectsViewportRef = useRef<HTMLDivElement>(null);
@@ -68,7 +73,7 @@ export function App() {
   }
 
   return (
-    <main className="portfolio-shell">
+    <main className={getPerformanceClassName()}>
       <section className="hero-lab" aria-label="Primeira tela do portfolio Murilo Lab">
         <div className="hero-lab__grid" aria-hidden="true" />
         <header className="topbar">
@@ -81,27 +86,24 @@ export function App() {
 
         <div className="hero-lab__content">
           <div className="hero-lab__copy">
-            <span className="eyebrow" id="Inicio" >
+            <span className="eyebrow" id="Inicio">
               <Sparkles size={16} />
-              Portfolio pessoal / Developer Lab
+              {portfolioConfig.eyebrow}
             </span>
-            <h1>Murilo Alves</h1>
-            <p className="hero-lab__headline">Construindo ideias com código, automação e tecnologia.</p>
-            <p className="hero-lab__description">
-              Desenvolvedor em evolução, explorando web, IA, infraestrutura, servidores e soluções
-              criativas para transformar curiosidade em projetos reais.
-            </p>
+            <h1>{portfolioConfig.name}</h1>
+            <p className="hero-lab__headline">{portfolioConfig.headline}</p>
+            <p className="hero-lab__description">{portfolioConfig.bio}</p>
 
             <div className="hero-lab__actions">
               <a className="button button--primary" href="#projetos">
                 Ver projetos
                 <ArrowUpRight size={18} />
               </a>
-              <a className="button button--ghost" href="https://github.com/ItsMuriloa/" target="_blank" rel="noreferrer">
+              <a className="button button--ghost" href={portfolioConfig.githubUrl} target="_blank" rel="noreferrer">
                 <Github size={18} />
                 GitHub
               </a>
-              <a className="button button--ghost" href="https://www.linkedin.com/in/itsmuriloa/" target="_blank" rel="noreferrer">
+              <a className="button button--ghost" href={portfolioConfig.linkedinUrl} target="_blank" rel="noreferrer">
                 <Linkedin size={18} />
                 LinkedIn
               </a>
@@ -113,7 +115,7 @@ export function App() {
 
             <div className="avatar-console">
               <div className="avatar-frame">
-                <img className="memoji-image" src={avatarImage} alt="Avatar 3D de Murilo Alves" />
+                <img className="memoji-image" src={avatarImage} alt={'Avatar 3D de ' + portfolioConfig.name} />
               </div>
 
               <div className="orbit-system" aria-hidden="true">
@@ -166,7 +168,7 @@ export function App() {
               <h2>Áreas que estou me desenvolvendo</h2>
             </div>
             <div className="skill-cloud">
-              {focusAreas.map((area) => (
+              {portfolioConfig.skills.map((area) => (
                 <span key={area}>{area}</span>
               ))}
             </div>
@@ -231,7 +233,7 @@ export function App() {
                       <span>★ {repository.stargazers_count}</span>
                     </div>
                     <h3>{repository.name}</h3>
-                    <p>{repository.description || 'Repositório público do GitHub de Murilo Alves.'}</p>
+                    <p>{repository.description || ('Repositório público do GitHub de ' + portfolioConfig.name + '.')}</p>
                     {repository.topics && repository.topics.length > 0 && (
                       <div className="project-card__topics" aria-label="Tópicos do projeto">
                         {repository.topics.slice(0, 3).map((topic) => (
@@ -253,10 +255,10 @@ export function App() {
 
       <footer className="contact-strip" id="contato">
         <div>
-          <strong>Tem uma ideia, projeto ou desafio técnico?</strong>
-          <span>Bora conversar e transformar isso em algo funcional.</span>
+          <strong>{portfolioConfig.contactTitle}</strong>
+          <span>{portfolioConfig.contactText}</span>
         </div>
-        <a className="button button--primary" href="mailto:muriloa.pro@gmail.com">
+        <a className="button button--primary" href={getContactHref()}>
           <Mail size={18} />
           Contato
         </a>

@@ -261,7 +261,6 @@ a {
     radial-gradient(circle at 74% 18%, rgba(77, 141, 255, 0.32), transparent 34%),
     radial-gradient(circle at 22% 76%, rgba(157, 108, 255, 0.22), transparent 36%),
     rgba(255, 255, 255, 0.035);
-  filter: blur(2px);
   content: "";
 }
 
@@ -272,7 +271,6 @@ a {
   object-fit: contain;
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.3));
 }
 
 .stage-asset--laptop {
@@ -329,7 +327,6 @@ a {
   max-width: none;
   margin-bottom: 0;
   object-fit: contain;
-  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.32));
   animation: avatar-breathe 4.8s ease-in-out infinite;
 }
 
@@ -385,7 +382,6 @@ a {
   max-width: 100%;
   max-height: none;
   object-fit: contain;
-  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.34));
   transform: translate(var(--image-x, 0), var(--image-y, 0)) scale(var(--image-scale, 1));
 }
 
@@ -622,7 +618,6 @@ a {
   right: 4%;
   bottom: 4%;
   width: min(360px, 86%);
-  filter: drop-shadow(0 28px 42px rgba(0, 0, 0, 0.32));
   animation: float-device 7.5s ease-in-out -1.3s infinite;
 }
 
@@ -631,7 +626,6 @@ a {
   top: -2%;
   width: min(430px, 106%);
   opacity: 0.92;
-  filter: drop-shadow(0 20px 34px rgba(0, 0, 0, 0.26));
   animation: float-soft 6.2s ease-in-out -2s infinite;
 }
 
@@ -1074,6 +1068,62 @@ a {
     right: -10%;
     width: 82%;
   }
+}
+
+.portfolio-shell.perf-no-orbit .orbit-system,
+.portfolio-shell.perf-lite .orbit-system {
+  display: none;
+}
+
+.portfolio-shell.perf-no-motion .hero-lab__copy,
+.portfolio-shell.perf-no-motion .memoji-image,
+.portfolio-shell.perf-no-motion .orbit-system,
+.portfolio-shell.perf-no-motion .orbit-visual,
+.portfolio-shell.perf-no-motion .skills-visual__server,
+.portfolio-shell.perf-no-motion .skills-visual__tools,
+.portfolio-shell.perf-lite .hero-lab__copy,
+.portfolio-shell.perf-lite .memoji-image,
+.portfolio-shell.perf-lite .orbit-system,
+.portfolio-shell.perf-lite .orbit-visual,
+.portfolio-shell.perf-lite .skills-visual__server,
+.portfolio-shell.perf-lite .skills-visual__tools {
+  animation: none !important;
+}
+
+.portfolio-shell.perf-no-filters .lab-stage::before,
+.portfolio-shell.perf-no-filters .stage-asset,
+.portfolio-shell.perf-no-filters .memoji-image,
+.portfolio-shell.perf-no-filters .orbit-item img,
+.portfolio-shell.perf-no-filters .skills-visual__server,
+.portfolio-shell.perf-no-filters .skills-visual__tools,
+.portfolio-shell.perf-lite .lab-stage::before,
+.portfolio-shell.perf-lite .stage-asset,
+.portfolio-shell.perf-lite .memoji-image,
+.portfolio-shell.perf-lite .orbit-item img,
+.portfolio-shell.perf-lite .skills-visual__server,
+.portfolio-shell.perf-lite .skills-visual__tools {
+  filter: none !important;
+}
+
+.portfolio-shell.perf-no-blur .brand,
+.portfolio-shell.perf-no-blur .topnav,
+.portfolio-shell.perf-no-blur .button,
+.portfolio-shell.perf-no-blur .lab-pill,
+.portfolio-shell.perf-no-blur .floating-card,
+.portfolio-shell.perf-lite .brand,
+.portfolio-shell.perf-lite .topnav,
+.portfolio-shell.perf-lite .button,
+.portfolio-shell.perf-lite .lab-pill,
+.portfolio-shell.perf-lite .floating-card {
+  backdrop-filter: none !important;
+}
+
+.orbit-system,
+.orbit-visual,
+.memoji-image,
+.skills-visual__server,
+.skills-visual__tools {
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
