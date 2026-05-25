@@ -6,27 +6,97 @@ export const portfolioConfig = {
   githubUsername: (import.meta.env.VITE_GITHUB_USERNAME || 'ItsMuriloa').trim(),
   githubUrl: 'https://github.com/ItsMuriloa/',
   linkedinUrl: 'https://www.linkedin.com/in/itsmuriloa/',
-  eyebrow: 'Portfolio pessoal / Backend-minded developer',
+  eyebrow: 'Disponível para projetos',
   headline: 'Construo sistemas, APIs e automações que resolvem problemas reais.',
-  bio:
-    'Desenvolvedor em evolução com foco em lógica, PHP, Laravel, MySQL, resolução de bugs e sistemas web organizados.',
+  bio: 'Desenvolvedor em evolução com foco em lógica, PHP, Laravel, MySQL, resolução de bugs e sistemas web organizados.',
+  heroSubtitle: 'Full Stack Developer focado em backend, APIs escaláveis e infraestrutura. Transformo problemas complexos em soluções estáveis e performáticas.',
   skills: [
-    'PHP',
-    'Laravel',
-    'MySQL',
-    'APIs',
-    'JavaScript',
-    'TypeScript',
-    'React',
-    'Tailwind CSS',
-    'Docker',
-    'Git e GitHub',
-    'Automações',
+    'PHP', 'Laravel', 'MySQL', 'APIs', 'JavaScript', 'TypeScript',
+    'React', 'Tailwind CSS', 'Docker', 'Git e GitHub', 'Automações',
   ],
   contactTitle: 'Tem uma ideia, projeto ou desafio técnico?',
   contactText: 'Bora conversar e transformar isso em algo funcional.',
   contactSubject: 'Contato pelo portfolio',
   contactBody: 'Olá Murilo, vi seu portfolio e gostaria de conversar sobre um projeto.',
+
+  // About section cards
+  aboutCards: [
+    {
+      title: 'Quem sou',
+      text: 'Desenvolvedor Full Stack com mente backend-first. Fascinado por arquitetura limpa, performance de bancos de dados e infraestrutura estável.',
+      icon: 'user',
+    },
+    {
+      title: 'Minha área',
+      text: 'Backend com PHP e Laravel, APIs REST escaláveis, bancos de dados relacionais otimizados e automações inteligentes com n8n.',
+      icon: 'code',
+    },
+    {
+      title: 'Como trabalho',
+      text: 'Clean Code, SOLID, versionamento rigoroso e foco em resolver problemas reais. Código que funciona hoje e escala amanhã.',
+      icon: 'settings',
+    },
+    {
+      title: 'O que construo',
+      text: 'Sistemas web escaláveis, APIs robustas, automações de processos e infraestrutura em VPS com Docker e Nginx.',
+      icon: 'layers',
+    },
+  ],
+
+  // Craft section
+  craftDescription: 'Desenvolvo software com foco em resolver gargalos reais. Meu trabalho envolve backend sólido, APIs performáticas, automações inteligentes e interfaces que fazem sentido. Cada projeto é uma oportunidade de entregar algo estável, bem estruturado e que realmente funciona.',
+  craftTechnologies: [
+    'PHP', 'Laravel', 'MySQL', 'Redis', 'APIs REST',
+    'TypeScript', 'React', 'JavaScript', 'Vite',
+    'Docker', 'Nginx', 'Linux', 'Git',
+    'n8n', 'Automações',
+  ],
+
+  // Featured projects
+  featuredProjects: [
+    {
+      id: 'laravel-api-engine',
+      number: '01',
+      category: 'Backend Engineering',
+      name: 'Laravel REST API Engine',
+      description: 'Core de APIs robustas e escaláveis estruturadas sob conceitos de Clean Code e SOLID. Hub de microsserviços com cache, eventos assíncronos e processamento em segundo plano.',
+      techs: ['PHP', 'Laravel', 'MySQL', 'APIs REST', 'Redis'],
+      githubUrl: 'https://github.com/ItsMuriloa/PortfolioPessoal',
+      demoUrl: 'https://itsmuriloa.com',
+      image: '/Img/terminal.png',
+    },
+    {
+      id: 'n8n-automations',
+      number: '02',
+      category: 'Workflow Automation',
+      name: 'n8n Automation Hub',
+      description: 'Central de automações inteligentes e fluxos de trabalho distribuídos. Integração ativa de Webhooks assíncronos, bots de mensageria e orquestração automatizada.',
+      techs: ['n8n', 'Workflow Automation', 'API Integration', 'JavaScript', 'Webhooks'],
+      githubUrl: 'https://github.com/ItsMuriloa/n8n-automations',
+      image: '/Img/automacao.png',
+    },
+    {
+      id: 'vps-infra-bootstrap',
+      number: '03',
+      category: 'DevOps & Infrastructure',
+      name: 'VPS Linux Infra Bootstrap',
+      description: 'Provisionamento automatizado e receitas Docker Compose prontas para produção. Proxy reverso Nginx, SSL/TLS automático e blindagem de servidores VPS.',
+      techs: ['DevOps', 'VPS Oracle', 'Docker Compose', 'Nginx', 'Linux Security'],
+      githubUrl: 'https://github.com/ItsMuriloa/vps-infra-bootstrap',
+      image: '/Img/pc.png',
+    },
+  ],
+
+  // Skills by category
+  skillCategories: {
+    'Front-end': ['React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite'],
+    'Back-end': ['PHP', 'Laravel', 'Node.js', 'APIs REST', 'Redis', 'Eloquent ORM'],
+    'Banco de Dados': ['MySQL', 'PostgreSQL', 'Query Optimization', 'Indexação', 'Migrations'],
+    'DevOps & Tools': ['Docker', 'Nginx', 'Linux', 'VPS Oracle', 'Git & GitHub', 'CI/CD', 'SSL/TLS'],
+    'Design & UI': ['Figma', 'UI/UX Basics', 'Responsive Design', 'Design Systems', 'Prototipagem'],
+  },
+
+  // Fallback repositories
   fallbackRepositories: [
     {
       id: 1,
