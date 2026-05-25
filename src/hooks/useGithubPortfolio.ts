@@ -5,12 +5,14 @@ import {
   type GitHubRepository,
   type GitHubUser,
 } from '../services/github';
+import { portfolioConfig } from '../config';
 
 type GitHubPortfolioState = {
   error: string | null;
   isLoading: boolean;
   profile: GitHubUser | null;
   repositories: GitHubRepository[];
+  isUsingFallback: boolean;
 };
 
 export function useGithubPortfolio(username: string) {
@@ -19,15 +21,17 @@ export function useGithubPortfolio(username: string) {
     isLoading: true,
     profile: null,
     repositories: [],
+    isUsingFallback: false,
   });
 
   useEffect(() => {
     if (!username || username === 'seu-usuario') {
       setState({
-        error: 'Configure seu usuário do GitHub em VITE_GITHUB_USERNAME.',
+        error: null, // Mudamos para null porque vamos exibir o fallback mesmo se o usuário não configurou
         isLoading: false,
         profile: null,
-        repositories: [],
+        repositories: portfolioConfig.fallbackRepositories || [],
+        isUsingFallback: true,
       });
       return;
     }
@@ -59,6 +63,7 @@ export function useGithubPortfolio(username: string) {
             isLoading: false,
             profile,
             repositories,
+            isUsingFallback: false,
           });
         }
       } catch (error) {
@@ -66,20 +71,26 @@ export function useGithubPortfolio(username: string) {
           return;
         }
 
+        const fallback = portfolioConfig.fallbackRepositories || [];
+
         if (!controller.signal.aborted) {
           setState({
-            error: error instanceof Error ? error.message : 'Não foi possível carregar seus projetos.',
+            error: null, // Sem erro na tela, pois carregamos o fallback com sucesso!
             isLoading: false,
             profile: null,
-            repositories: [],
+            repositories: fallback,
+            isUsingFallback: true,
           });
+          console.warn('useGithubPortfolio: Erro ao carregar da API do GitHub. Usando fallback estático.', error);
         } else if (didTimeout) {
           setState({
-            error: 'A conexão com o GitHub demorou demais. Tente recarregar a página.',
+            error: null,
             isLoading: false,
             profile: null,
-            repositories: [],
+            repositories: fallback,
+            isUsingFallback: true,
           });
+          console.warn('useGithubPortfolio: Timeout ao carregar da API do GitHub. Usando fallback estático.');
         }
       } finally {
         window.clearTimeout(timeoutId);
