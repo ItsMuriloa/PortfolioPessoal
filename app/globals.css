@@ -229,6 +229,13 @@ p {
   box-sizing: border-box;
 }
 
+/* Override: seções com conteúdo denso usam padding em vez de flex-center puro */
+.about-section.section-slide,
+.skills-section.section-slide,
+.explore-section.section-slide {
+  justify-content: flex-start;
+}
+
 @media (max-width: 768px) {
   .section-slide {
     min-height: auto !important;
@@ -633,12 +640,14 @@ section[id] {
   background-color: var(--bg-primary);
   position: relative;
   width: 100%;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
 }
 
 @media (min-width: 768px) {
   .about-section {
-    padding-top: 90px; /* Margem da navbar fixa */
-    padding-bottom: 20px;
+    padding-top: 100px; /* Margem da navbar fixa */
+    padding-bottom: 30px;
   }
 }
 
@@ -926,19 +935,19 @@ section[id] {
   }
 }
 
-/* Container Sticky Interno */
+/* Container Sticky Interno — mantém o conteúdo visível no viewport enquanto o usuário scrolla o track de 300vh */
 .projects-sticky {
   position: sticky;
   top: 0;
   height: 100dvh;
   width: 100%;
-  overflow: visible; /* Mantido visível para propagar scroll nativo e permitir o stacking dos cards */
+  overflow: hidden; /* Contém o conteúdo dentro do viewport visível */
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  padding-top: 90px; /* Margem da navbar fixa */
-  padding-bottom: 20px;
+  padding-top: 100px; /* Margem da navbar fixa */
+  padding-bottom: 30px;
 }
 
 @media (max-width: 768px) {
@@ -963,8 +972,8 @@ section[id] {
 
 @media (min-width: 768px) {
   .projects-list {
-    gap: 12vh; /* Gaps fluidos para criar o tempo exato de scroll-stacking */
-    padding-bottom: 16vh;
+    gap: 0; /* Sem gap: o stacking é controlado via top offset de cada card sticky */
+    padding-bottom: 0;
   }
 }
 
@@ -1317,12 +1326,14 @@ section[id] {
   width: 100%;
   overflow-x: clip;
   overflow-y: visible;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
 }
 
 @media (min-width: 768px) {
   .skills-section {
-    padding-top: 90px;
-    padding-bottom: 20px;
+    padding-top: 100px;
+    padding-bottom: 30px;
   }
 }
 
@@ -1512,11 +1523,13 @@ section[id] {
   background-color: var(--bg-primary);
   position: relative;
   width: 100%;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-md);
 }
 
 @media (min-width: 768px) {
   .explore-section {
-    padding-top: 90px;
+    padding-top: 100px;
     padding-bottom: 40px;
   }
 }
