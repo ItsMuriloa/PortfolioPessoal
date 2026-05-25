@@ -351,22 +351,23 @@ export default function Home() {
 
       {/* 5. SEÇÃO PROJETOS (STICKY STACKING PREMIUM) */}
       <section className="projects-section" id="projects">
-        <div className="projects-sticky">
         {/* Elementos Cromados Decorativos de Fundo */}
-        <div className="floating-object anim-rotate-slow" style={{ top: "35%", left: "-10%", width: "320px", opacity: 0.1 }}>
+        <div className="floating-object anim-rotate-slow" style={{ position: "fixed", top: "35%", left: "-10%", width: "320px", opacity: 0.1, pointerEvents: "none" }}>
           <img src="/Img/ObjTrasparentes/6.png" alt="Chrome Ribbon" style={{ width: "100%", height: "auto" }} />
         </div>
-        <div className="floating-object anim-drift-slow" style={{ bottom: "12%", right: "-6%", width: "240px", opacity: 0.12 }}>
+        <div className="floating-object anim-drift-slow" style={{ position: "fixed", bottom: "12%", right: "-6%", width: "240px", opacity: 0.12, pointerEvents: "none" }}>
           <img src="/Img/ObjTrasparentes/9.png" alt="Chrome Anchor" style={{ width: "100%", height: "auto" }} />
         </div>
 
-        <div className="container">
-          
-          {/* TÍTULO DA SEÇÃO */}
+        {/* Título Sticky — fica visível no topo enquanto os cards sobem */}
+        <div className="projects-title-sticky container">
           <div className="section-title-container" style={{ marginBottom: "var(--space-lg)" }}>
             <span className="section-tag">03 / TRABALHOS SELECIONADOS</span>
             <h2 className="section-title font-editorial">PROJETOS &amp; SOLUÇÕES</h2>
           </div>
+        </div>
+
+        <div className="container">
 
           {/* LISTA DE PROJETOS EM STACKING */}
           <div className="projects-list">
@@ -480,7 +481,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
