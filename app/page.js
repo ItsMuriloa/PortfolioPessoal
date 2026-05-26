@@ -1,12 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { achievements } from "@/data/achievements";
+
+import ProjectsSection from "./components/ProjectsSection";
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState(null); // 'contact' | 'achievements' | 'links' | null
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado do menu mobile
   const [activeSection, setActiveSection] = useState("home"); // Estado da seção visível no scroll
+  const projectsRef = useRef(null);
 
   // Fechar no Esc e travar/destravar scroll do body
   useEffect(() => {
@@ -29,24 +32,36 @@ export default function Home() {
     };
   }, [activeModal]);
 
-  // IntersectionObserver para detectar seção ativa
+  // Scrollspy robusto baseado em posições absolutas com offset para compensar a navbar fixa
   useEffect(() => {
-    const sections = document.querySelectorAll("section[id]");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.35, rootMargin: "-80px 0px -30% 0px" } // Ajuste fino para a navbar fixa
-    );
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 180; // 180px de offset (ajuste fino ideal para antecipar a seção ativa na leitura)
+      
+      const sectionIds = ["home", "about", "projects", "skills", "explore"];
+      let currentSection = "home";
 
-    sections.forEach((section) => observer.observe(section));
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            currentSection = id;
+          }
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Executa imediatamente e após renderização completa do layout
+    handleScroll();
+    const timer = setTimeout(handleScroll, 100);
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -86,18 +101,18 @@ export default function Home() {
             Sobre
           </a>
           <a 
-            href="#skills" 
-            className={`nav-link ${activeSection === "skills" ? "active" : ""}`}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Skills
-          </a>
-          <a 
             href="#projects" 
             className={`nav-link ${activeSection === "projects" ? "active" : ""}`}
             onClick={() => setIsMenuOpen(false)}
           >
             Projetos
+          </a>
+          <a 
+            href="#skills" 
+            className={`nav-link ${activeSection === "skills" ? "active" : ""}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Skills
           </a>
           <a 
             href="#explore" 
@@ -295,6 +310,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 3. SEÇÃO PROJETOS (FRAMER MOTION SCROLL) */}
+      <ProjectsSection />
+
       {/* 4. SEÇÃO SKILLS (3D METALLIC ORBIT BELTS) */}
       <section className="skills-section section-slide" id="skills">
         {/* Elemento Cromado Decorativo de Fundo */}
@@ -306,7 +324,7 @@ export default function Home() {
           {/* Bloco Central de Texto */}
           <div className="skills-central-card">
             <span className="section-tag" style={{ color: "var(--accent-gold)", marginBottom: "0.5rem", display: "inline-block" }}>
-              02 / TECNOLOGIAS &amp; STACK
+              03 / TECNOLOGIAS &amp; STACK
             </span>
             <h2 className="skills-main-text">
               Ferramentas que uso para transformar ideias em sistemas reais.
@@ -348,142 +366,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* 5. SEÇÃO PROJETOS (STICKY STACKING PREMIUM) */}
-      <section className="projects-section" id="projects">
-        {/* Elementos Cromados Decorativos de Fundo */}
-        <div className="floating-object anim-rotate-slow" style={{ position: "fixed", top: "35%", left: "-10%", width: "320px", opacity: 0.1, pointerEvents: "none" }}>
-          <img src="/Img/ObjTrasparentes/6.png" alt="Chrome Ribbon" style={{ width: "100%", height: "auto" }} />
-        </div>
-        <div className="floating-object anim-drift-slow" style={{ position: "fixed", bottom: "12%", right: "-6%", width: "240px", opacity: 0.12, pointerEvents: "none" }}>
-          <img src="/Img/ObjTrasparentes/9.png" alt="Chrome Anchor" style={{ width: "100%", height: "auto" }} />
-        </div>
-
-        {/* Título Sticky — fica visível no topo enquanto os cards sobem */}
-        <div className="projects-title-sticky container">
-          <div className="section-title-container" style={{ marginBottom: "var(--space-lg)" }}>
-            <span className="section-tag">03 / TRABALHOS SELECIONADOS</span>
-            <h2 className="section-title font-editorial">PROJETOS &amp; SOLUÇÕES</h2>
-          </div>
-        </div>
-
-        <div className="container">
-
-          {/* LISTA DE PROJETOS EM STACKING */}
-          <div className="projects-list">
-            
-            {/* Projeto 01 - Async Studio */}
-            <div className="project-card">
-              <div className="project-info">
-                <div className="project-header">
-                  <span className="project-number">01</span>
-                  <h3 className="project-title font-editorial">Async Studio</h3>
-                  <p className="project-desc">
-                    Landing page e identidade digital de alta performance desenvolvida para a apresentação elegante de serviços de desenvolvimento de software.
-                  </p>
-                  <div className="project-tags">
-                    <span className="project-tag">React</span>
-                    <span className="project-tag">Tailwind</span>
-                    <span className="project-tag">Vercel</span>
-                  </div>
-                </div>
-                <div className="project-actions">
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="btn-project-primary">
-                    Ver projeto <span className="project-arrow">—&gt;</span>
-                  </a>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="btn-project-secondary">
-                    Ver código
-                  </a>
-                </div>
-              </div>
-              <div className="project-media">
-                <img
-                  className="project-img"
-                  src="/Img/pc.png"
-                  alt="Async Studio Mockup"
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Projeto 02 - Sistema Jurídico / ERP */}
-            <div className="project-card">
-              <div className="project-info">
-                <div className="project-header">
-                  <span className="project-number">02</span>
-                  <h3 className="project-title font-editorial">Sistema Jurídico / ERP</h3>
-                  <p className="project-desc">
-                    Sistema web completo e sob medida voltado para a gestão interna de processos jurídicos, clientes, andamentos processuais, relatórios automatizados e módulos administrativos integrados.
-                  </p>
-                  <div className="project-tags">
-                    <span className="project-tag">PHP</span>
-                    <span className="project-tag">MySQL</span>
-                    <span className="project-tag">Laravel</span>
-                  </div>
-                </div>
-                <div className="project-actions">
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="btn-project-primary">
-                    Ver projeto <span className="project-arrow">—&gt;</span>
-                  </a>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="btn-project-secondary">
-                    Ver código
-                  </a>
-                </div>
-              </div>
-              <div className="project-media">
-                <img
-                  className="project-img"
-                  src="/Img/software.png"
-                  alt="Sistema Jurídico Mockup"
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Projeto 03 - Automações com n8n */}
-            <div className="project-card">
-              <div className="project-info">
-                <div className="project-header">
-                  <span className="project-number">03</span>
-                  <h3 className="project-title font-editorial">Automações com n8n</h3>
-                  <p className="project-desc">
-                    Desenvolvimento de fluxos inteligentes e automatizados de dados conectando APIs externas, Google Drive, planilhas inteligentes, gateways e modelos avançados de Inteligência Artificial.
-                  </p>
-                  <div className="project-tags">
-                    <span className="project-tag">n8n</span>
-                    <span className="project-tag">APIs</span>
-                    <span className="project-tag">Docker</span>
-                    <span className="project-tag">IA</span>
-                  </div>
-                </div>
-                <div className="project-actions">
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="btn-project-primary">
-                    Ver projeto <span className="project-arrow">—&gt;</span>
-                  </a>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="btn-project-secondary">
-                    Ver código
-                  </a>
-                </div>
-              </div>
-              <div className="project-media">
-                <img
-                  className="project-img"
-                  src="/Img/automacao.png"
-                  alt="Automação n8n Mockup"
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 6. SEÇÃO MAIS PARA EXPLORAR (OUTROS COM MODAIS) */}
       <section className="explore-section section-slide" id="explore">
         {/* Elemento Cromado Decorativo de Fundo */}

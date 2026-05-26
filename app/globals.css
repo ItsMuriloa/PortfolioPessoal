@@ -72,8 +72,6 @@ html, body {
 @media (min-width: 768px) {
   html {
     scroll-behavior: smooth;
-    /* proximity garante rolagem suave e natural nos projetos, sem travar ou pular cards */
-    scroll-snap-type: y proximity;
   }
 }
 
@@ -223,8 +221,6 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   scroll-margin-top: 80px; /* Alinhamento correto com a altura da navbar */
   box-sizing: border-box;
 }
@@ -452,8 +448,6 @@ section[id] {
   overflow: hidden;
   padding-top: var(--space-xl);
   padding-bottom: var(--space-lg);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .hero-content {
@@ -646,8 +640,8 @@ section[id] {
 
 @media (min-width: 768px) {
   .about-section {
-    padding-top: 100px; /* Margem da navbar fixa */
-    padding-bottom: 30px;
+    padding-top: 78px; /* Margem da navbar fixa */
+    padding-bottom: 18px;
   }
 }
 
@@ -660,7 +654,7 @@ section[id] {
 
 @media (min-width: 768px) {
   .section-title-container {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.8rem;
   }
 }
 
@@ -673,7 +667,7 @@ section[id] {
 }
 
 .section-title {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
   color: var(--text-primary);
   line-height: 1;
 }
@@ -689,8 +683,8 @@ section[id] {
 @media (min-width: 768px) {
   .bento-grid {
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: clamp(90px, 13.5vh, 135px); /* Altura otimizada para evitar cortes */
-    gap: 12px;
+    grid-auto-rows: clamp(108px, 14.5vh, 128px); /* Altura adaptativa para notebooks menores */
+    gap: 10px;
   }
 }
 
@@ -710,7 +704,7 @@ section[id] {
 
 @media (min-width: 768px) {
   .bento-card {
-    padding: var(--space-sm); /* Mais compacto para telas de laptop */
+    padding: 0.78rem; /* Mais compacto para telas de laptop */
   }
 }
 
@@ -775,7 +769,8 @@ section[id] {
 
 @media (min-width: 768px) {
   .bento-text {
-    font-size: clamp(0.95rem, 1.15vw, 1.1rem); /* Fonte fluida e otimizada */
+    font-size: clamp(0.8rem, 0.92vw, 0.94rem); /* Fonte fluida e otimizada */
+    line-height: 1.3;
   }
 }
 
@@ -804,6 +799,7 @@ section[id] {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 28%;
   filter: grayscale(1) contrast(1.1) brightness(0.75);
   transition: filter var(--transition-smooth), transform var(--transition-smooth);
 }
@@ -824,7 +820,7 @@ section[id] {
 
 @media (min-width: 768px) {
   .bento-photo-overlay {
-    padding: var(--space-sm);
+    padding: 0.85rem;
   }
 }
 
@@ -883,7 +879,8 @@ section[id] {
 
 @media (min-width: 768px) {
   .bento-stack-grid {
-    margin-top: 0.25rem;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
   }
 }
 
@@ -901,8 +898,9 @@ section[id] {
 
 @media (min-width: 768px) {
   .bento-stack-item {
-    padding: 0.35rem 0.2rem;
-    font-size: clamp(0.6rem, 0.75vw, 0.7rem);
+    padding: 0.3rem 0.18rem;
+    font-size: clamp(0.54rem, 0.66vw, 0.64rem);
+    line-height: 1.1;
   }
 }
 
@@ -913,72 +911,15 @@ section[id] {
 }
 
 /* ==========================================================================
-   ESTILOS DA SEÇÃO PROJETOS (STICKY STACKING PREMIUM)
+   ESTILOS DA SEÇÃO PROJETOS (FRAMER MOTION)
    ========================================================================== */
 
-.projects-section {
-  height: 300vh;
+.projects-section-framer {
   background-color: var(--bg-primary);
-  position: relative;
-  width: 100%;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  scroll-margin-top: 80px;
 }
 
-@media (max-width: 768px) {
-  .projects-section {
-    height: auto;
-    padding: 0 0;
-    scroll-snap-align: none;
-    scroll-snap-stop: normal;
-  }
-}
-
-/* Container Sticky Interno — mantém o conteúdo visível no viewport enquanto o usuário scrolla o track de 300vh */
-.projects-sticky {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-  width: 100%;
-  overflow: hidden; /* Contém o conteúdo dentro do viewport visível */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-sizing: border-box;
-  padding-top: 100px; /* Margem da navbar fixa */
-  padding-bottom: 30px;
-}
-
-@media (max-width: 768px) {
-  .projects-sticky {
-    position: relative;
-    height: auto;
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-lg);
-    overflow: visible;
-  }
-}
-
-.projects-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-  .projects-list {
-    gap: 0; /* Sem gap: o stacking é controlado via top offset de cada card sticky */
-    padding-bottom: 0;
-  }
-}
-
-/* Card Sticky do Projeto */
 .project-card {
+  pointer-events: auto;
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
@@ -986,9 +927,8 @@ section[id] {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-md);
-  position: relative;
   overflow: hidden;
-  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   min-height: 330px;
 }
@@ -996,18 +936,11 @@ section[id] {
 @media (min-width: 768px) {
   .project-card {
     grid-template-columns: 1.15fr 0.85fr;
-    padding: var(--space-md) var(--space-lg);
-    gap: var(--space-lg);
-    /* Preparação da estrutura sticky para o stacked scroll */
-    position: sticky;
-    margin-bottom: 40px;
-    height: clamp(340px, 50vh, 420px); /* Altura fluida perfeita para caber em telas curtas */
+    padding: clamp(1.15rem, 2.4vh, 1.7rem) clamp(1.5rem, 4vw, 4rem);
+    gap: clamp(1.2rem, 3vw, 3.5rem);
+    height: clamp(300px, 48vh, 420px);
+    min-height: 0;
   }
-  
-  /* Sistema de Empilhamento Escalonado de 3 Cards */
-  .project-card:nth-child(1) { top: 100px; z-index: 10; }
-  .project-card:nth-child(2) { top: 145px; z-index: 20; }
-  .project-card:nth-child(3) { top: 190px; z-index: 30; }
 }
 
 .project-card::after {
@@ -1177,7 +1110,7 @@ section[id] {
 @media (min-width: 768px) {
   .project-media {
     height: 100%;
-    min-height: 350px;
+    min-height: 0;
   }
 }
 
@@ -1196,11 +1129,7 @@ section[id] {
     position: absolute;
     top: -30px;
     height: calc(100% + 60px);
-    
-    /* Parallax vertical nativo controlado pixel a pixel pelo progresso real do scroll */
-    animation: img-parallax linear both;
-    animation-timeline: view();
-    animation-range: entry 100% exit 0%;
+    translate: 0 calc((var(--projects-progress, 0) - 0.5) * 40px);
   }
 }
 
@@ -1224,37 +1153,17 @@ section[id] {
    ANIMAÇÃO DE EMPILHAMENTO DE CARDS (SCROLL-DRIVEN ANIMATIONS NATIVAS)
    ========================================================================== */
 
-@supports (animation-timeline: view()) {
-  @media (min-width: 768px) {
-    .project-card {
-      /* Âncora de rotação no topo para manter as bordas prateadas alinhadas */
-      transform-origin: top center;
-      
-      /* Animação nativa que dá perspectiva 3D sutil à medida que o card é coberto */
-      animation: card-stacked-scroll linear both;
-      animation-timeline: view();
-      
-      /* O efeito inicia quando o card começa a sair/ser coberto pela borda superior da tela */
-      animation-range: exit 0% exit 100%;
-    }
+@media (max-width: 768px) {
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    min-height: auto;
+  }
 
-    @keyframes card-stacked-scroll {
-      to {
-        /* Encolhe muito sutilmente para efeito 3D, mantendo 100% de foco, nitidez e legibilidade */
-        transform: scale(0.97) translateY(-10px);
-        opacity: 0.94;
-      }
-    }
-
-    /* Efeito de Parallax Vertical nas imagens dos mockups de projetos no scroll */
-    @keyframes img-parallax {
-      from {
-        translate: 0 -20px;
-      }
-      to {
-        translate: 0 20px;
-      }
-    }
+  .project-card {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -1332,8 +1241,8 @@ section[id] {
 
 @media (min-width: 768px) {
   .skills-section {
-    padding-top: 100px;
-    padding-bottom: 30px;
+    padding-top: 86px;
+    padding-bottom: 24px;
   }
 }
 
@@ -1358,12 +1267,12 @@ section[id] {
 @media (min-width: 768px) {
   .skills-central-card {
     /* Afasta elegantemente a frase central da órbita de cards para melhor legibilidade */
-    margin-bottom: 2.2rem;
+    margin-bottom: 1rem;
   }
 }
 
 .skills-main-text {
-  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.45rem, 3vw, 2.15rem);
   font-family: var(--font-editorial);
   color: var(--text-primary);
   line-height: 1.15;
@@ -1373,7 +1282,7 @@ section[id] {
 }
 
 .skills-subtext {
-  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  font-size: clamp(0.88rem, 1vw, 1rem);
   color: var(--text-secondary);
   line-height: 1.5;
   max-width: 600px;
@@ -1388,7 +1297,7 @@ section[id] {
   flex-direction: column;
   gap: var(--space-sm);
   /* Aumento expressivo do padding vertical para dar respiro à flutuação 3D */
-  padding: 20px 0;
+  padding: 28px 0;
   perspective: 1200px; /* Profundidade 3D crucial */
   /* Remove o overflow limitador nas duas direções para evitar que o navegador converta y para hidden e corte cards */
   overflow: visible;
@@ -1397,7 +1306,7 @@ section[id] {
 @media (min-width: 768px) {
   .skills-orbit-container {
     transform: rotateX(8deg) rotateY(-5deg) rotateZ(-1.5deg); /* Leve inclinação 3D de órbita */
-    margin-top: 1rem;
+    margin-top: 0;
   }
 }
 
@@ -1412,7 +1321,7 @@ section[id] {
   mask-image: linear-gradient(to right, transparent, #fff 15%, #fff 85%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, #fff 15%, #fff 85%, transparent);
   /* Padding vertical generoso de folga interna para conter flutuações e escalas 3D sem cortes da máscara */
-  padding-block: 24px;
+  padding-block: 28px;
   /* Garante que o overflow vertical do marquee não seja restringido */
   overflow: visible;
 }
@@ -1450,7 +1359,7 @@ section[id] {
   background-color: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 0.9rem 1.6rem;
+  padding: 0.82rem 1.45rem;
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -1529,8 +1438,8 @@ section[id] {
 
 @media (min-width: 768px) {
   .explore-section {
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding-top: 86px;
+    padding-bottom: 28px;
   }
 }
 
@@ -1546,8 +1455,8 @@ section[id] {
 .explore-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-md);
-  margin-top: var(--space-md);
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
   width: 100%;
 }
 
@@ -1562,12 +1471,12 @@ section[id] {
   background-color: var(--bg-tertiary);
   border: 1px solid rgba(216, 220, 226, 0.08); /* Borda prateada extremamente suave */
   border-radius: var(--radius-lg);
-  padding: 1.8rem var(--space-md); /* Reduzido padding de luxo vertical para notebook */
+  padding: 1.45rem var(--space-md); /* Reduzido padding de luxo vertical para notebook */
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 290px; /* Altura otimizada para evitar cortes de tela */
+  min-height: clamp(220px, 28vh, 260px); /* Adaptativo para telas menores */
   position: relative;
   overflow: hidden;
   transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
@@ -1610,7 +1519,7 @@ section[id] {
 
 /* Número Gigante Cromado com Reflexo Metálico Nativo */
 .explore-card-number {
-  font-size: 3.8rem;
+  font-size: clamp(2.9rem, 5vw, 3.5rem);
   font-weight: 900;
   background: linear-gradient(180deg, var(--chrome-light) 0%, var(--chrome-medium) 50%, var(--chrome-dark) 100%);
   -webkit-background-clip: text;
@@ -1641,22 +1550,22 @@ section[id] {
 }
 
 .explore-card-body {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
 }
 
 .explore-card-title {
-  font-size: 1.9rem;
+  font-size: clamp(1.45rem, 2.5vw, 1.75rem);
   color: var(--text-primary);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
 .explore-card-desc {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.55;
 }
@@ -2094,8 +2003,3 @@ section[id] {
     opacity: 1;
   }
 }
-
-
-
-
-
