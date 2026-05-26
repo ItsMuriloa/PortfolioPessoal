@@ -276,11 +276,7 @@ export default function Home() {
               </div>
               <div className="bento-stack-grid">
                 <div className="bento-stack-item">PHP / LARAVEL</div>
-                <div className="bento-stack-item">REACT / NEXT.JS</div>
-                <div className="bento-stack-item">MYSQL / POSTGRES</div>
-                <div className="bento-stack-item">DOCKER / DEVOP</div>
-                <div className="bento-stack-item">N8N / AUTOMATION</div>
-                <div className="bento-stack-item">INTEGRAÇÕES IA</div>
+                <div className="bento-stack-item">AUTOMAÇÃO COM IA / DEVOPS</div>
               </div>
             </div>
 
@@ -340,8 +336,8 @@ export default function Home() {
             {/* Linha 1: Scrolling Left */}
             <div className="skills-marquee-row marquee-left">
               {[
-                "React", "Next.js", "JavaScript", "PHP", "Laravel", "MySQL", "PostgreSQL", "Figma",
-                "React", "Next.js", "JavaScript", "PHP", "Laravel", "MySQL", "PostgreSQL", "Figma"
+                "React", "Next.js", "JavaScript", "PHP", "Laravel", "MySQL", "PostgreSQL", "Figma", "Inglês - Basico", 
+                "React", "Next.js", "JavaScript", "PHP", "Laravel", "MySQL", "PostgreSQL", "Figma", "Inglês - Basico"
               ].map((skill, idx) => (
                 <div className="skill-card" key={`r1-${idx}`}>
                   <span className="skill-icon"></span>
@@ -353,8 +349,8 @@ export default function Home() {
             {/* Linha 2: Scrolling Right */}
             <div className="skills-marquee-row marquee-right">
               {[
-                "n8n", "APIs", "IA", "ChatGPT", "Docker", "Nginx", "GitHub Actions", "Figma",
-                "n8n", "APIs", "IA", "ChatGPT", "Docker", "Nginx", "GitHub Actions", "Figma"
+                "Automações low-code", "APIs", "IA", "ChatGPT", "Claude", "Docker", "Nginx", "GitHub Actions", "Figma", "Espanhol - Basico",
+                "Automações low-code", "APIs", "IA", "ChatGPT", "Claude", "Docker", "Nginx", "GitHub Actions", "Figma", "Espanhol - Basico"
               ].map((skill, idx) => (
                 <div className="skill-card" key={`r2-${idx}`}>
                   <span className="skill-icon"></span>
