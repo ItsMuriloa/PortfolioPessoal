@@ -7,13 +7,13 @@ export default function Skills() {
 
   return (
     <section className="skills-section section-slide" id="skills">
-      <div className="floating-object anim-drift-slow" style={{ top: "10%", left: "5%", width: "220px", opacity: 0.12 }}>
+      <div className="floating-object anim-drift-slow" style={{ top: "10%", left: "5%", width: "220px", opacity: 0.08 }}>
         <Image src="/assets/chrome/4.png" alt="" width={220} height={220} style={{ width: "100%", height: "auto" }} aria-hidden="true" />
       </div>
 
       <div className="skills-content container">
         <div className="skills-central-card">
-          <span className="section-tag" style={{ color: "var(--accent-gold)", marginBottom: "0.5rem", display: "inline-block" }}>
+          <span className="section-tag skills-tag">
             03 / TECNOLOGIAS &amp; STACK
           </span>
           <h2 className="skills-main-text">
@@ -24,7 +24,7 @@ export default function Skills() {
           </p>
         </div>
 
-        <div className="skills-orbit-container">
+        <div className="skills-orbit-container" aria-label="Tecnologias principais">
           <div className="skills-marquee-row marquee-left">
             {row1Skills.map((skill, idx) => (
               <div className="skill-card" key={`r1-${idx}`}>

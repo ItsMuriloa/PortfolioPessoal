@@ -53,17 +53,17 @@ export default function Projects() {
 
   return (
     <section className="projects-section-framer projects-carousel-section section-slide" id="projects">
-      <div className="floating-object anim-rotate-slow" style={{ position: "absolute", top: "20%", left: "-10%", width: "320px", opacity: 0.1, pointerEvents: "none" }}>
+      <div className="floating-object anim-rotate-slow" style={{ position: "absolute", top: "20%", left: "-10%", width: "320px", opacity: 0.07, pointerEvents: "none" }}>
         <Image src="/assets/chrome/6.png" alt="" width={320} height={320} style={{ width: "100%", height: "auto" }} aria-hidden="true" />
       </div>
-      <div className="floating-object anim-drift-slow" style={{ position: "absolute", bottom: "12%", right: "-6%", width: "240px", opacity: 0.12, pointerEvents: "none" }}>
+      <div className="floating-object anim-drift-slow" style={{ position: "absolute", bottom: "12%", right: "-6%", width: "240px", opacity: 0.08, pointerEvents: "none" }}>
         <Image src="/assets/chrome/9.png" alt="" width={240} height={240} style={{ width: "100%", height: "auto" }} aria-hidden="true" />
       </div>
 
       <div className="container projects-carousel-container">
         <div className="section-title-container projects-carousel-title">
           <span className="section-tag">02 / TRABALHOS SELECIONADOS</span>
-          <h2 className="section-title font-editorial">PROJETOS &amp; SOLUÇÕES</h2>
+          <h2 className="section-title font-editorial">Projetos &amp; soluções</h2>
         </div>
 
         <div
@@ -82,7 +82,7 @@ export default function Projects() {
             onClick={showPrevious}
             aria-label="Projeto anterior"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block", margin: "auto" }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
@@ -150,7 +150,7 @@ export default function Projects() {
             onClick={showNext}
             aria-label="Próximo projeto"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block", margin: "auto" }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </button>

@@ -1,25 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const navItems = [
+  { href: "#home", id: "home", label: "Home" },
+  { href: "#about", id: "about", label: "Sobre" },
+  { href: "#projects", id: "projects", label: "Projetos" },
+  { href: "#skills", id: "skills", label: "Skills" },
+  { href: "#explore", id: "explore", label: "Outros" },
+];
 
 export default function Navbar({ onOpenContact }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Scrollspy robusto baseado em posições absolutas com offset para compensar a navbar fixa
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 180; // 180px de offset
-      const sectionIds = ["home", "about", "projects", "skills", "explore"];
+      const scrollPosition = window.scrollY + 180;
       let currentSection = "home";
 
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
+      for (const item of navItems) {
+        const el = document.getElementById(item.id);
         if (el) {
           const top = el.getBoundingClientRect().top + window.scrollY;
           const height = el.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
-            currentSection = id;
+            currentSection = item.id;
           }
         }
       }
@@ -39,59 +45,34 @@ export default function Navbar({ onOpenContact }) {
 
   return (
     <nav className="nav-bar">
-      <a href="#home" className="logo">
+      <a href="#home" className="logo" onClick={() => setIsMenuOpen(false)}>
         MA.
       </a>
 
-      {/* Botão Hambúrguer Mobile */}
-      <button 
-        className={`nav-toggle ${isMenuOpen ? "active" : ""}`} 
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="Abrir Menu de Navegação"
+      <button
+        className={`nav-toggle ${isMenuOpen ? "active" : ""}`}
+        onClick={() => setIsMenuOpen((current) => !current)}
+        aria-label="Abrir menu de navegação"
+        aria-expanded={isMenuOpen}
+        aria-controls="primary-navigation"
       >
         <span className="bar"></span>
         <span className="bar"></span>
         <span className="bar"></span>
       </button>
 
-      {/* Links de Navegação */}
-      <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-        <a 
-          href="#home" 
-          className={`nav-link ${activeSection === "home" ? "active" : ""}`}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Home
-        </a>
-        <a 
-          href="#about" 
-          className={`nav-link ${activeSection === "about" ? "active" : ""}`}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Sobre
-        </a>
-        <a 
-          href="#projects" 
-          className={`nav-link ${activeSection === "projects" ? "active" : ""}`}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Projetos
-        </a>
-        <a 
-          href="#skills" 
-          className={`nav-link ${activeSection === "skills" ? "active" : ""}`}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Skills
-        </a>
-        <a 
-          href="#explore" 
-          className={`nav-link ${activeSection === "explore" ? "active" : ""}`}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Outros
-        </a>
-        <button 
+      <div id="primary-navigation" className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            className={`nav-link ${activeSection === item.id ? "active" : ""}`}
+            onClick={() => setIsMenuOpen(false)}
+            key={item.id}
+          >
+            {item.label}
+          </a>
+        ))}
+        <button
           className="nav-link-btn"
           onClick={(event) => {
             setIsMenuOpen(false);

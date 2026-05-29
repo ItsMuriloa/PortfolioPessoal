@@ -3,21 +3,21 @@ import Image from "next/image";
 export default function About() {
   return (
     <section className="about-section section-slide" id="about">
-      <div className="floating-object anim-float-slow" style={{ top: "8%", right: "8%", width: "260px", opacity: 0.12, filter: "blur(2px) drop-shadow(0 20px 50px rgba(0,0,0,0.5))" }}>
+      <div className="floating-object anim-float-slow" style={{ top: "8%", right: "8%", width: "260px", opacity: 0.08, filter: "blur(2px) drop-shadow(0 20px 50px rgba(0,0,0,0.5))" }}>
         <Image src="/assets/chrome/8.png" alt="" width={260} height={260} style={{ width: "100%", height: "auto" }} aria-hidden="true" />
       </div>
 
       <div className="container">
         <div className="section-title-container">
           <span className="section-tag">01 / SOBRE MIM</span>
-          <h2 className="section-title font-editorial">CONCEITO &amp; PROPOSITO</h2>
+          <h2 className="section-title font-editorial">Conceito &amp; propósito</h2>
         </div>
 
         <div className="bento-grid">
           <div className="bento-card bento-col-2">
-            <span className="bento-label">MINDSET</span>
+            <span className="bento-label">Mindset</span>
             <p className="bento-text">
-              Construo mais do que software. Antes de codar, busco entender o <span className="bento-text-highlight">problema real</span> para desenhar a melhor solucao.
+              Construo mais do que software. Antes de codar, busco entender o <span className="bento-text-highlight">problema real</span> para desenhar a melhor solução.
             </p>
           </div>
 
@@ -31,29 +31,29 @@ export default function About() {
               priority
             />
             <div className="bento-photo-overlay">
-              <span className="bento-label" style={{ color: "var(--accent-gold)" }}>CREATIVE FULL STACK</span>
-              <h3 className="bento-text" style={{ fontSize: "1.3rem", fontWeight: "900", lineHeight: "1.1" }}>MURILO ALVES</h3>
+              <span className="bento-label bento-label-accent">Creative Full Stack</span>
+              <h3 className="bento-person-name">Murilo Alves</h3>
             </div>
           </div>
 
           <div className="bento-card">
-            <span className="bento-label">CRAFT</span>
+            <span className="bento-label">Craft</span>
             <p className="bento-text">
               Crio sistemas robustos, landing pages, automações inteligentes e soluções digitais com foco em <span className="bento-text-highlight">uso real</span>.
             </p>
           </div>
 
           <div className="bento-card">
-            <span className="bento-label">PROCESSO</span>
+            <span className="bento-label">Processo</span>
             <p className="bento-text">
-              Trabalho guiado por <span className="bento-text-highlight">clareza</span>, organizacao metodica, evolucao constante e entrega consistente de valor real.
+              Trabalho guiado por <span className="bento-text-highlight">clareza</span>, organização metódica, evolução constante e entrega consistente de valor real.
             </p>
           </div>
 
           <div className="bento-card bento-col-2">
             <div>
-              <span className="bento-label">ESTRUTURA TECNICA</span>
-              <p className="bento-text" style={{ fontSize: "1.1rem" }}>
+              <span className="bento-label">Estrutura técnica</span>
+              <p className="bento-text bento-text-lg">
                 Meu ecossistema é otimizado para escalabilidade, performance e automação inteligente de processos.
               </p>
             </div>
@@ -72,10 +72,10 @@ export default function About() {
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div className="bento-map-overlay">
-              <span className="bento-label">LOCALIZACAO</span>
+              <span className="bento-label">Localização</span>
               <div>
-                <h4 className="bento-text" style={{ fontSize: "1.25rem" }}>RIO GRANDE DO SUL</h4>
-                <p className="mono" style={{ fontSize: "0.7rem", marginTop: "0.2rem", color: "var(--accent-gold)" }}>
+                <h4 className="bento-location-title">Rio Grande do Sul</h4>
+                <p className="bento-location-meta mono">
                   BRASIL - 30.0346 S, 51.2177 W
                 </p>
               </div>

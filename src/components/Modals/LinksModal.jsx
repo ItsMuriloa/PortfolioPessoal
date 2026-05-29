@@ -35,12 +35,12 @@ export default function LinksModal({ onClose, returnFocusTo }) {
         aria-describedby="links-modal-desc"
       >
         <button ref={closeButtonRef} className="modal-close-btn mono" onClick={onClose}>
-          FECHAR [X]
+          Fechar
         </button>
 
         <div className="modal-inner">
           <span className="modal-tag mono">03 / ECOSSISTEMA DIGITAL</span>
-          <h3 id="links-modal-title" className="modal-title font-editorial">Meus Links</h3>
+          <h3 id="links-modal-title" className="modal-title font-editorial">Meus links</h3>
           <p id="links-modal-desc" className="modal-desc">
             Me encontre pela web e acompanhe meus projetos.
           </p>
@@ -49,7 +49,7 @@ export default function LinksModal({ onClose, returnFocusTo }) {
             <a href={profile.socials.github} target="_blank" rel="noopener noreferrer" className="links-tree-item">
               <div className="links-item-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.44 5.44 0 0 0 3.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                 </svg>
               </div>
               <div className="links-item-text">
@@ -69,7 +69,7 @@ export default function LinksModal({ onClose, returnFocusTo }) {
               </div>
               <div className="links-item-text">
                 <span className="links-item-title font-editorial">LinkedIn</span>
-                <span className="links-item-desc">Perfil profissional e conexoes.</span>
+                <span className="links-item-desc">Perfil profissional e conexões.</span>
               </div>
               <span className="links-item-arrow">-&gt;</span>
             </a>
@@ -97,7 +97,7 @@ export default function LinksModal({ onClose, returnFocusTo }) {
               </div>
               <div className="links-item-text">
                 <span className="links-item-title font-editorial">WhatsApp</span>
-                <span className="links-item-desc">Contato rapido para conversas e oportunidades.</span>
+                <span className="links-item-desc">Contato rápido para conversas e oportunidades.</span>
               </div>
               <span className="links-item-arrow">-&gt;</span>
             </a>

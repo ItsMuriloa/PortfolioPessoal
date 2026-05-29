@@ -35,7 +35,7 @@ export default function ContactModal({ onClose, returnFocusTo }) {
         aria-describedby="contact-modal-desc"
       >
         <button ref={closeButtonRef} className="modal-close-btn mono" onClick={onClose}>
-          FECHAR [X]
+          Fechar
         </button>
 
         <div className="modal-inner">
@@ -55,12 +55,12 @@ export default function ContactModal({ onClose, returnFocusTo }) {
                   <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
               </div>
-              <h4 className="contact-option-title font-editorial">Marcar reuniao</h4>
+              <h4 className="contact-option-title font-editorial">Marcar reunião</h4>
               <p className="contact-option-desc">
-                Agende um horario para conversarmos com calma sobre sua ideia ou projeto.
+                Agende um horário para conversarmos com calma sobre sua ideia ou projeto.
               </p>
               <a href={profile.calendly} target="_blank" rel="noopener noreferrer" className="btn btn-primary contact-btn">
-                Marcar reuniao
+                Marcar reunião
               </a>
             </div>
 
@@ -75,16 +75,16 @@ export default function ContactModal({ onClose, returnFocusTo }) {
               <p className="contact-option-desc">
                 Prefere explicar sua ideia por escrito? Me envie uma mensagem por e-mail.
               </p>
-              <a href={`mailto:${profile.email}`} className="btn btn-secondary contact-btn" style={{ width: "100%" }}>
+              <a href={`mailto:${profile.email}`} className="btn btn-secondary contact-btn">
                 Enviar e-mail
               </a>
             </div>
           </div>
 
           <div className="contact-whatsapp-footer">
-            <span className="mono">Ou se preferir mensagem rapida:</span>
+            <span className="mono">Ou se preferir uma mensagem rápida:</span>
             <a href={`https://wa.me/${profile.phone}`} target="_blank" rel="noopener noreferrer" className="btn-whatsapp-link mono">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: "6px" }} aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
               </svg>
               Chamar no WhatsApp

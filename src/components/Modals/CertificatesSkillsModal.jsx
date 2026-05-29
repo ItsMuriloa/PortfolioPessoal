@@ -36,12 +36,12 @@ export default function CertificatesSkillsModal({ onClose, returnFocusTo }) {
         aria-describedby="certificates-skills-desc"
       >
         <button ref={closeButtonRef} className="modal-close-btn mono" onClick={onClose}>
-          FECHAR [X]
+          Fechar
         </button>
 
         <div className="modal-inner">
           <span className="modal-tag mono">02 / CERTIFICADOS E SKILLS</span>
-          <h3 id="certificates-skills-title" className="modal-title font-editorial">Stack tecnica</h3>
+          <h3 id="certificates-skills-title" className="modal-title font-editorial">Stack técnica</h3>
           <p id="certificates-skills-desc" className="modal-desc">
             Habilidades, tecnologias e estudos organizados para facilitar a manutenção do portfólio.
           </p>
@@ -88,7 +88,7 @@ export default function CertificatesSkillsModal({ onClose, returnFocusTo }) {
                   <div className="achievement-item-footer">
                     {certificate.link ? (
                       <a href={certificate.link} target="_blank" rel="noopener noreferrer" className="achievement-btn mono">
-                        VER REFERENCIA -&gt;
+                        Ver referência -&gt;
                       </a>
                     ) : (
                       <span className="achievement-btn-disabled mono">[ {certificate.status} ]</span>
