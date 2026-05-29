@@ -1,0 +1,80 @@
+export const skills = [
+  {
+    id: "react-next",
+    name: "React / Next.js",
+    category: "Front-end",
+    level: "Uso prático",
+    description: "Construção de interfaces modernas, responsivas e orientadas a componentes.",
+  },
+  {
+    id: "javascript",
+    name: "JavaScript",
+    category: "Linguagem",
+    level: "Uso prático",
+    description: "Base para interfaces interativas, integrações e lógica de aplicações web.",
+  },
+  {
+    id: "php-laravel",
+    name: "PHP / Laravel",
+    category: "Back-end",
+    level: "Stack principal",
+    description: "Desenvolvimento de sistemas, APIs, painéis administrativos e regras de negócio.",
+  },
+  {
+    id: "databases",
+    name: "MySQL / PostgreSQL",
+    category: "Banco de dados",
+    level: "Uso prático",
+    description: "Modelagem, consultas e persistência para sistemas internos e produtos web.",
+  },
+  {
+    id: "automations",
+    name: "Automações low-code",
+    category: "Automação",
+    level: "Uso prático",
+    description: "Fluxos com APIs, ferramentas de produtividade e orquestração de tarefas repetitivas.",
+  },
+  {
+    id: "ai",
+    name: "IA aplicada",
+    category: "Inteligência artificial",
+    level: "Uso prático",
+    description: "Uso de modelos de IA para apoio a automações, análise e experiências digitais.",
+  },
+  {
+    id: "devops",
+    name: "Docker / Nginx / Deploy",
+    category: "Infraestrutura",
+    level: "Base operacional",
+    description: "Publicação de apps, servidores VPS, conteinerização e configurações de ambiente.",
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    category: "Design",
+    level: "Apoio ao processo",
+    description: "Leitura, organização e refinamento visual de interfaces antes da implementação.",
+  },
+  {
+    id: "languages",
+    name: "Inglês / Espanhol",
+    category: "Idiomas",
+    level: "Básico",
+    description: "Leitura técnica, estudo contínuo e comunicação inicial em contextos profissionais.",
+  },
+];
+
+export const marqueeSkills = [
+  skills.map((skill) => skill.name),
+  [
+    "APIs",
+    "ChatGPT",
+    "Claude",
+    "GitHub Actions",
+    "UX/UI",
+    "Landing pages",
+    "ERPs",
+    "Integrações",
+    "Sistemas web",
+  ],
+];

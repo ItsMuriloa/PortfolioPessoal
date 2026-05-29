@@ -1,0 +1,21 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#000000"/>
+  <path d="M0 0H1200V630H0V0Z" fill="url(#grid)"/>
+  <circle cx="935" cy="140" r="160" fill="url(#chrome)" opacity="0.28"/>
+  <circle cx="190" cy="500" r="120" fill="url(#chrome)" opacity="0.16"/>
+  <text x="80" y="250" fill="#F2F2F2" font-family="Arial, sans-serif" font-size="92" font-weight="900">MURILO ALVES</text>
+  <text x="86" y="318" fill="#D8DCE2" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="6">FULL STACK DEVELOPER</text>
+  <text x="86" y="390" fill="#B8BCC2" font-family="Arial, sans-serif" font-size="30">Sistemas web, automacoes e solucoes digitais.</text>
+  <rect x="86" y="445" width="310" height="58" rx="29" fill="#D8DCE2"/>
+  <text x="124" y="483" fill="#000000" font-family="Arial, sans-serif" font-size="20" font-weight="800">PORTFOLIO PESSOAL</text>
+  <defs>
+    <pattern id="grid" width="150" height="90" patternUnits="userSpaceOnUse">
+      <path d="M150 0H0V90" stroke="#D8DCE2" stroke-opacity="0.05"/>
+    </pattern>
+    <linearGradient id="chrome" x1="800" y1="0" x2="1100" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="0.45" stop-color="#D8DCE2"/>
+      <stop offset="1" stop-color="#7E858E"/>
+    </linearGradient>
+  </defs>
+</svg>

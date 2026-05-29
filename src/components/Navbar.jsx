@@ -93,9 +93,9 @@ export default function Navbar({ onOpenContact }) {
         </a>
         <button 
           className="nav-link-btn"
-          onClick={() => {
+          onClick={(event) => {
             setIsMenuOpen(false);
-            onOpenContact();
+            onOpenContact(event.currentTarget);
           }}
         >
           Contato

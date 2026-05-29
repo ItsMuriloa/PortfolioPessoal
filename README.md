@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfólio Pessoal - Murilo Alves
 
-## Getting Started
+Portfólio one-page desenvolvido para apresentar meu perfil profissional, stack, projetos, certificados e canais de contato.
 
-First, run the development server:
+Sou Murilo Alves, Desenvolvedor Full Stack no Rio Grande do Sul, com foco em sistemas web, automações, integrações, infraestrutura e experiências digitais objetivas. O portfólio foi pensado para comunicar essa atuação de forma visual, direta e fácil de manter.
+
+## Como foi desenvolvido
+
+O projeto foi construído com Next.js, React, CSS customizado e dados locais centralizados. A interface usa uma composição editorial escura, elementos cromados, seções em tela cheia, carousel de projetos, modais acessíveis e imagens otimizadas com `next/image`.
+
+## Stack
+
+- Next.js
+- React
+- JavaScript
+- CSS customizado
+- ESLint com configuração `core-web-vitals`
+
+## Estrutura principal
+
+- `src/app`: rotas, layout, SEO, sitemap, robots e estilos globais.
+- `src/components`: seções visuais e modais.
+- `src/data`: conteúdo editável do portfólio.
+- `public/assets/projetos`: imagens e documentação dos projetos reais.
+- `public/assets/projects`: imagens genéricas e placeholders.
+- `public/assets/images`: imagens pessoais e apoio visual.
+
+## Como atualizar projetos
+
+Adicione imagens e documentação em:
+
+```txt
+public/assets/projetos/nome-do-projeto/cover.png
+public/assets/projetos/nome-do-projeto/screenshot-01.png
+public/assets/projetos/nome-do-projeto/README.md
+```
+
+Use nomes consistentes e atualize `src/data/projects.js` com imagem principal, título, descrição, tecnologias, status e links. Quando o projeto não tiver deploy público ou código aberto, use `projectLink: null` e `codeLink: null`.
+
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Publicação na Vercel
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Configuração recomendada:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Framework: Next.js
+- Build command: `npm run build`
+- Output: automático do Next.js
+- Variável de ambiente: `NEXT_PUBLIC_SITE_URL=https://itsmuriloa.com`
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O domínio final do projeto é `https://itsmuriloa.com`. Essa URL alimenta metadata, Open Graph, sitemap e robots.

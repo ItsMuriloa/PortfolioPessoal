@@ -1,4 +1,5 @@
 import { Outfit, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { profile } from "@/data/profile";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -19,17 +20,55 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || profile.siteUrl;
+
 export const metadata = {
-  title: "Murilo Alves | Full Stack Developer & Tech Craftsman",
-  description: "Portfólio pessoal de Murilo Alves. Desenvolvimento de sistemas web, automações inteligentes, landing pages de alta conversão, integrações e IAs.",
-  keywords: ["Murilo Alves", "Full Stack Developer", "Laravel", "React", "Docker", "n8n", "Inteligência Artificial", "Automação", "Desenvolvedor PHP"],
-  authors: [{ name: "Murilo Alves" }],
-  creator: "Murilo Alves",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${profile.name} | ${profile.role}`,
+    template: `%s | ${profile.name}`,
+  },
+  description: "Portfólio pessoal de Murilo Alves, desenvolvedor focado em sistemas web, automações, integrações e experiências digitais.",
+  keywords: [
+    "Murilo Alves",
+    "Desenvolvedor Full Stack",
+    "React",
+    "Next.js",
+    "Laravel",
+    "PHP",
+    "Automação",
+    "Inteligência Artificial",
+    "Portfólio",
+  ],
+  authors: [{ name: profile.name }],
+  creator: profile.name,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Murilo Alves | Full Stack Developer",
-    description: "Desenvolvo sistemas, automações e experiências digitais premium.",
-    type: "website",
+    title: `${profile.name} | ${profile.role}`,
+    description: "Sistemas web, automações e experiências digitais com foco em clareza, performance e valor real.",
+    url: "/",
+    siteName: `${profile.name} Portfólio`,
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: `${profile.name} - ${profile.role}`,
+      },
+    ],
     locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.name} | ${profile.role}`,
+    description: "Portfólio pessoal de desenvolvimento web, automações e soluções digitais.",
+    images: ["/og-image.svg"],
+  },
+  icons: {
+    icon: "/favicon.svg",
   },
 };
 

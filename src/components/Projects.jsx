@@ -1,154 +1,173 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { projects } from "@/data/projects";
 
+const AUTOPLAY_DELAY = 5000;
+
 export default function Projects() {
-  const containerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const activeProject = projects[activeIndex];
+  const hasProjectLink = Boolean(activeProject.projectLink);
+  const hasCodeLink = Boolean(activeProject.codeLink);
+  const hasImageMedia = activeProject.mediaType !== "placeholder" && Boolean(activeProject.image);
+  const mediaStyle = {
+    "--project-media-fit": activeProject.mediaFit || "cover",
+    "--project-media-position": activeProject.mediaPosition || "center",
+  };
+  const statusLabel = `[ ${activeProject.status.toUpperCase()} ]`;
 
-  // Monitora o progresso de rolagem apenas desta seção (de 0 a 1)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  useEffect(() => {
+    if (isPaused || projects.length <= 1) {
+      return undefined;
+    }
 
-  /* 
-    RANGES DE ANIMAÇÃO
-    
-    0.00 a 0.20: Card 1 ativo, inteiro e em destaque.
-    0.20 a 0.35: Card 1 sobe, reduz levemente e trava na stack.
-    0.35 a 0.55: Card 2 entra como card principal.
-    0.55 a 0.70: Card 2 sobe, reduz levemente e trava na stack.
-    0.70 a 0.90: Card 3 entra como card principal.
-    0.90 a 1.00: Pilha final estabiliza.
-  */
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % projects.length);
+    }, AUTOPLAY_DELAY);
 
-  // --- CARD 01 (Índice 0) ---
-  const scale1 = useTransform(scrollYProgress, [0, 0.2, 0.35, 1], [1, 1, 0.94, 0.94]);
-  const y1 = useTransform(scrollYProgress, [0, 0.2, 0.35, 1], ["28vh", "28vh", "18vh", "18vh"]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.05, 1], [0, 1, 1]);
+    return () => window.clearInterval(timer);
+  }, [isPaused]);
 
-  // --- CARD 02 (Índice 1) ---
-  const scale2 = useTransform(scrollYProgress, [0, 0.35, 0.55, 0.7, 1], [1, 1, 1, 0.97, 0.97]);
-  const y2 = useTransform(scrollYProgress, [0, 0.35, 0.55, 0.7, 1], ["100vh", "100vh", "28vh", "23vh", "23vh"]);
-  const opacity2 = useTransform(scrollYProgress, [0, 0.34, 0.35, 1], [0, 0, 1, 1]);
-  
-  // --- CARD 03 (Índice 2) ---
-  const scale3 = useTransform(scrollYProgress, [0, 0.7, 0.9, 1], [1, 1, 1, 1]);
-  const y3 = useTransform(scrollYProgress, [0, 0.7, 0.9, 1], ["100vh", "100vh", "28vh", "28vh"]);
-  const opacity3 = useTransform(scrollYProgress, [0, 0.69, 0.7, 1], [0, 0, 1, 1]);
+  const showPrevious = () => {
+    setActiveIndex((current) => (current - 1 + projects.length) % projects.length);
+  };
 
-  // Agrupamos os transforms em vetores para mapear facilmente
-  const cardTransforms = [
-    { scale: scale1, y: y1, opacity: opacity1, zIndex: 10 },
-    { scale: scale2, y: y2, opacity: opacity2, zIndex: 20 },
-    { scale: scale3, y: y3, opacity: opacity3, zIndex: 30 }
-  ];
+  const showNext = () => {
+    setActiveIndex((current) => (current + 1) % projects.length);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showPrevious();
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showNext();
+    }
+  };
 
   return (
-    <section 
-      ref={containerRef}
-      className="projects-section-framer" 
-      id="projects"
-      style={{ height: "400vh", position: "relative" }}
-    >
-      {/* Container Sticky que prende o bloco visual na tela */}
-      <div 
-        className="projects-sticky-framer"
-        style={{ 
-          position: "sticky", 
-          top: "80px", 
-          height: "calc(100dvh - 80px)", 
-          width: "100%", 
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        {/* Elementos Cromados Decorativos de Fundo */}
-        <div className="floating-object anim-rotate-slow" style={{ position: "absolute", top: "20%", left: "-10%", width: "320px", opacity: 0.1, pointerEvents: "none" }}>
-          <img src="/assets/chrome/6.png" alt="Chrome Ribbon" style={{ width: "100%", height: "auto" }} />
-        </div>
-        <div className="floating-object anim-drift-slow" style={{ position: "absolute", bottom: "12%", right: "-6%", width: "240px", opacity: 0.12, pointerEvents: "none" }}>
-          <img src="/assets/chrome/9.png" alt="Chrome Anchor" style={{ width: "100%", height: "auto" }} />
+    <section className="projects-section-framer projects-carousel-section section-slide" id="projects">
+      <div className="floating-object anim-rotate-slow" style={{ position: "absolute", top: "20%", left: "-10%", width: "320px", opacity: 0.1, pointerEvents: "none" }}>
+        <Image src="/assets/chrome/6.png" alt="" width={320} height={320} style={{ width: "100%", height: "auto" }} aria-hidden="true" />
+      </div>
+      <div className="floating-object anim-drift-slow" style={{ position: "absolute", bottom: "12%", right: "-6%", width: "240px", opacity: 0.12, pointerEvents: "none" }}>
+        <Image src="/assets/chrome/9.png" alt="" width={240} height={240} style={{ width: "100%", height: "auto" }} aria-hidden="true" />
+      </div>
+
+      <div className="container projects-carousel-container">
+        <div className="section-title-container projects-carousel-title">
+          <span className="section-tag">02 / TRABALHOS SELECIONADOS</span>
+          <h2 className="section-title font-editorial">PROJETOS &amp; SOLUÇÕES</h2>
         </div>
 
-        <div className="container projects-container-framer" style={{ position: "relative", height: "100%", width: "100%" }}>
-          
-          {/* TÍTULO DA SEÇÃO */}
-          <div className="section-title-container projects-title-framer" style={{ position: "absolute", top: "8vh", zIndex: 50 }}>
-            <span className="section-tag">02 / TRABALHOS SELECIONADOS</span>
-            <h2 className="section-title font-editorial">PROJETOS &amp; SOLUÇÕES</h2>
-          </div>
+        <div
+          className="projects-carousel"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
+          onKeyDown={handleKeyDown}
+          aria-roledescription="carousel"
+          aria-label="Projetos selecionados"
+        >
+          <button
+            type="button"
+            className="carousel-arrow carousel-arrow-prev"
+            onClick={showPrevious}
+            aria-label="Projeto anterior"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block", margin: "auto" }}>
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
 
-          {/* PALCO ABSOLUTO DE TELA INTEIRA PARA CARDS */}
-          <div className="framer-cards-container" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-            
-            {projects.map((project, index) => {
-              const transform = cardTransforms[index] || cardTransforms[0];
-              return (
-                <motion.div 
-                  key={project.id}
-                  className="card-wrapper-framer" 
-                  style={{ 
-                    position: "absolute", 
-                    top: 0, 
-                    left: 0, 
-                    width: "100%", 
-                    scale: transform.scale, 
-                    y: transform.y, 
-                    opacity: transform.opacity, 
-                    zIndex: transform.zIndex, 
-                    transformOrigin: "top center", 
-                    pointerEvents: "auto" 
-                  }}
-                >
-                  <div className={`project-card ${project.cardClass}`}>
-                    <div className="project-info">
-                      <div className="project-header">
-                        <span className="project-number">{project.number}</span>
-                        <h3 className="project-title font-editorial">{project.title}</h3>
-                        <p className="project-desc">{project.description}</p>
-                        <div className="project-tags">
-                          {project.tags.map((tag) => (
-                            <span className="project-tag" key={tag}>{tag}</span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="project-actions">
-                        {project.isComingSoon ? (
-                          <span className="mono" style={{ fontSize: "0.8rem", letterSpacing: "0.15em", color: "var(--accent-gold)", opacity: 0.8 }}>
-                            [ EM DESENVOLVIMENTO ]
-                          </span>
-                        ) : (
-                          <>
-                            <a href={project.projectLink} target="_blank" rel="noopener noreferrer" className="btn-project-primary">
-                              Ver projeto <span className="project-arrow">—&gt;</span>
-                            </a>
-                            <a href={project.codeLink} target="_blank" rel="noopener noreferrer" className="btn-project-secondary">
-                              Ver código
-                            </a>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                    <div className="project-media">
-                      <img
-                        className="project-img"
-                        src={project.image}
-                        alt={`${project.title} Mockup`}
-                        onError={(e) => { e.target.style.display = "none"; }}
-                      />
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+          <article className={`project-card ${activeProject.cardClass}`} aria-live="polite">
+            <div className="project-info">
+              <div className="project-header">
+                <span className="project-number">{activeProject.number}</span>
+                <span className="project-status mono">{activeProject.status}</span>
+                <h3 className="project-title font-editorial">{activeProject.title}</h3>
+                <p className="project-desc">{activeProject.description}</p>
+                <div className="project-tags">
+                  {activeProject.tags.map((tag) => (
+                    <span className="project-tag" key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </div>
 
-          </div>
+              <div className="project-actions">
+                {activeProject.isComingSoon ? (
+                  <span className="mono project-coming-soon">{statusLabel}</span>
+                ) : !hasProjectLink && !hasCodeLink ? (
+                  <span className="mono project-coming-soon">{statusLabel}</span>
+                ) : (
+                  <>
+                    {hasProjectLink && (
+                      <a href={activeProject.projectLink} target="_blank" rel="noopener noreferrer" className="btn-project-primary">
+                        Ver projeto <span className="project-arrow">-&gt;</span>
+                      </a>
+                    )}
+                    {hasCodeLink && (
+                      <a href={activeProject.codeLink} target="_blank" rel="noopener noreferrer" className="btn-project-secondary">
+                        Ver código
+                      </a>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className={`project-media project-media-${activeProject.mediaType || "image"}`} style={mediaStyle}>
+              {hasImageMedia ? (
+                <Image
+                  className="project-img"
+                  src={activeProject.image}
+                  alt={`Imagem do projeto ${activeProject.title}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                />
+              ) : (
+                <div className={`project-placeholder project-placeholder-${activeProject.placeholderVariant || "default"}`}>
+                  <span className="project-placeholder-icon" aria-hidden="true" />
+                  <span className="project-placeholder-kicker mono">{activeProject.status}</span>
+                  <strong className="project-placeholder-title">{activeProject.placeholderTitle || activeProject.title}</strong>
+                  <p className="project-placeholder-text">{activeProject.placeholderText}</p>
+                </div>
+              )}
+              <span className="project-image-hint mono">{activeProject.imageHint}</span>
+            </div>
+          </article>
+
+          <button
+            type="button"
+            className="carousel-arrow carousel-arrow-next"
+            onClick={showNext}
+            aria-label="Próximo projeto"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: "block", margin: "auto" }}>
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div className="carousel-dots" role="tablist" aria-label="Selecionar projeto">
+          {projects.map((project, index) => (
+            <button
+              type="button"
+              role="tab"
+              className={`carousel-dot ${index === activeIndex ? "active" : ""}`}
+              key={project.id}
+              onClick={() => setActiveIndex(index)}
+              aria-label={`Mostrar projeto ${project.number}`}
+              aria-selected={index === activeIndex}
+            />
+          ))}
         </div>
       </div>
     </section>
